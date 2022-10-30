@@ -1,0 +1,32 @@
+@import "./base.css";
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap");
+
+body {
+   padding: 0 20px;
+   font-family: "Noto Sans KR", sans-serif;
+   font-size: 14px;
+}
+a {
+   text-decoration: none;
+   color: #fff;
+}
+
+.q-table {
+   border: 1px solid #333;
+   &__card {
+      &.q-dark {
+         background: none;
+      }
+   }
+   &__grid {
+      &-item-card {
+         background-color: #222 !important;
+      }
+   }
+   thead {
+      background-color: #111;
+   }
+   tbody {
+      background-color: #222;
+   }
+}
