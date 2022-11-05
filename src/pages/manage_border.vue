@@ -1,15 +1,15 @@
 <template>
    <div class="table">
       <q-table
-         grid
+         title="Treats"
          :rows="rows"
          :columns="columns"
-         row-key="name"
+         row-key="num"
          :filter="filter"
+         :selected-rows-label="getSelectedString"
+         selection="multiple"
+         v-model:selected="selected"
          dark
-         v-model:pagination="pagination"
-         hide-pagination
-         hide-header
       >
          <template v-slot:top-right>
             <q-input borderless dense debounce="300" v-model="filter" placeholder="Search" dark>
@@ -18,180 +18,64 @@
                </template>
             </q-input>
          </template>
+         <template v-slot:body-cell-action="props">
+            <q-td :props="props">
+               <q-btn outline text-color="secondary" @click="openDetail(props.row.num)">{{ props.value }}</q-btn>
+            </q-td>
+         </template>
       </q-table>
-      <div class="row justify-center q-mt-md">
-         <q-pagination v-model="pagination.page" color="grey-8" :max="pagesNumber" />
-      </div>
    </div>
 </template>
 
-<script setup>
-import {ref, computed} from "vue"
+<script setup lang="ts">
+import {ref} from "vue"
+
+const selected = ref([])
+const getSelectedString = () => {
+   return selected.value.length === 0
+      ? ""
+      : `${selected.value.length} record${selected.value.length > 1 ? "s" : ""} selected of ${rows.length}`
+}
 
 const filter = ref("")
 
-const pagination = ref({
-   sortBy: "desc",
-   descending: false,
-   page: 1,
-   rowsPerPage: 12,
-   // rowsNumber: xx if getting data from a server
-})
-const pagesNumber = computed(() => Math.ceil(rows.length / pagination.value.rowsPerPage))
-
 const columns = [
    {
-      name: "number",
-      label: "번호",
-      field: "number",
-      align: "center",
-   },
-   {
       name: "title",
+      required: true,
       label: "제목",
       field: "title",
-      align: "center",
+      sortable: true,
+      align: "left",
    },
-   {
-      name: "name",
-      label: "이름",
-      field: "name",
-      align: "center",
-   },
-   {
-      name: "createDate",
-      label: "등록일",
-      field: "createDate",
-      align: "center",
-   },
-   {
-      name: "editDate",
-      label: "수정일",
-      field: "editDate",
-      align: "center",
-   },
-   {
-      name: "button",
-      label: "",
-      field: "button",
-      align: "center",
-   },
+   {name: "name", label: "이름", field: "name", align: "center"},
+   {name: "dateCreate", label: "등록일", field: "dateCreate", align: "center"},
+   {name: "dateEdit", label: "수정일", field: "dateEdit", align: "center"},
+   {name: "action", label: "", field: "action", align: "center"},
 ]
 
 const rows = [
    {
-      number: "1",
+      num: 1,
       title: "상태관리란 무엇일까?",
       name: "홍길동",
-      createDate: "2022-09-23",
-      editDate: "2022-09-23",
-      button: "상세보기",
+      dateCreate: "2022-09-23",
+      dateEdit: "2022-09-23",
+      action: "상세보기",
    },
    {
-      number: "1",
+      num: 2,
       title: "상태관리란 무엇일까?",
-      name: "홍길동",
-      createDate: "2022-09-23",
-      editDate: "2022-09-23",
-      button: "상세보기",
-   },
-   {
-      number: "1",
-      title: "상태관리란 무엇일까?",
-      name: "홍길동",
-      createDate: "2022-09-23",
-      editDate: "2022-09-23",
-      button: "상세보기",
-   },
-   {
-      number: "1",
-      title: "상태관리란 무엇일까?",
-      name: "홍길동",
-      createDate: "2022-09-23",
-      editDate: "2022-09-23",
-      button: "상세보기",
-   },
-   {
-      number: "1",
-      title: "상태관리란 무엇일까?",
-      name: "홍길동",
-      createDate: "2022-09-23",
-      editDate: "2022-09-23",
-      button: "상세보기",
-   },
-   {
-      number: "1",
-      title: "상태관리란 무엇일까?",
-      name: "홍길동",
-      createDate: "2022-09-23",
-      editDate: "2022-09-23",
-      button: "상세보기",
-   },
-   {
-      number: "1",
-      title: "상태관리란 무엇일까?",
-      name: "홍길동",
-      createDate: "2022-09-23",
-      editDate: "2022-09-23",
-      button: "상세보기",
-   },
-   {
-      number: "1",
-      title: "상태관리란 무엇일까?",
-      name: "홍길동",
-      createDate: "2022-09-23",
-      editDate: "2022-09-23",
-      button: "상세보기",
-   },
-   {
-      number: "1",
-      title: "상태관리란 무엇일까?",
-      name: "홍길동",
-      createDate: "2022-09-23",
-      editDate: "2022-09-23",
-      button: "상세보기",
-   },
-   {
-      number: "1",
-      title: "상태관리란 무엇일까?",
-      name: "홍길동",
-      createDate: "2022-09-23",
-      editDate: "2022-09-23",
-      button: "상세보기",
-   },
-   {
-      number: "1",
-      title: "상태관리란 무엇일까?",
-      name: "홍길동",
-      createDate: "2022-09-23",
-      editDate: "2022-09-23",
-      button: "상세보기",
-   },
-   {
-      number: "1",
-      title: "상태관리란 무엇일까?",
-      name: "홍길동",
-      createDate: "2022-09-23",
-      editDate: "2022-09-23",
-      button: "상세보기",
-   },
-   {
-      number: "1",
-      title: "상태관리란 무엇일까?",
-      name: "홍길동",
-      createDate: "2022-09-23",
-      editDate: "2022-09-23",
-      button: "상세보기",
-   },
-   {
-      number: "1",
-      title: "상태관리란 무엇일까?",
-      name: "홍길동",
-      createDate: "2022-09-23",
-      editDate: "2022-09-23",
-      button: "상세보기",
+      name: "조혁래",
+      dateCreate: "2022-09-23",
+      dateEdit: "2022-09-23",
+      action: "상세보기",
    },
 ]
+
+const openDetail = (val) => {
+   console.log(val)
+}
 </script>
 
 <style lang="scss" scoped>
