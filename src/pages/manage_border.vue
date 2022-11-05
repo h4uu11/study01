@@ -25,6 +25,23 @@
          </template>
       </q-table>
    </div>
+   <q-dialog v-model="modalDetailVal">
+      <q-card dark>
+         <q-card-section>
+            <div class="text-h6">제목</div>
+         </q-card-section>
+
+         <q-card-section class="q-pt-none">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum repellendus sit voluptate voluptas eveniet
+            porro. Rerum blanditiis perferendis totam, ea at omnis vel numquam exercitationem aut, natus minima, porro
+            labore.
+         </q-card-section>
+
+         <q-card-actions align="right">
+            <q-btn flat label="확인" color="secondary" v-close-popup />
+         </q-card-actions>
+      </q-card>
+   </q-dialog>
 </template>
 
 <script setup lang="ts">
@@ -73,8 +90,11 @@ const rows = [
    },
 ]
 
+const modalDetailVal = ref(false)
+
 const openDetail = (val) => {
    console.log(val)
+   modalDetailVal.value = true
 }
 </script>
 

@@ -1,6 +1,16 @@
 <template>
    <div class="table">
-      <q-table :rows="rows" :columns="columns" row-key="name" :filter="filter" dark>
+      <q-table
+         title="Treats"
+         :rows="rows"
+         :columns="columns"
+         row-key="num"
+         :filter="filter"
+         :selected-rows-label="getSelectedString"
+         selection="multiple"
+         v-model:selected="selected"
+         dark
+      >
          <template v-slot:top-right>
             <q-input borderless dense debounce="300" v-model="filter" placeholder="Search" dark>
                <template v-slot:append>
@@ -8,141 +18,85 @@
                </template>
             </q-input>
          </template>
+         <template v-slot:body-cell-action="props">
+            <q-td :props="props">
+               <q-btn outline text-color="secondary" @click="openDetail(props.row.num)">{{ props.value }}</q-btn>
+            </q-td>
+         </template>
       </q-table>
    </div>
+   <q-dialog v-model="modalDetailVal">
+      <q-card dark>
+         <q-card-section>
+            <div class="text-h6">비밀번호 변경</div>
+         </q-card-section>
+
+         <q-card-section class="q-pt-none">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum repellendus sit voluptate voluptas eveniet
+            porro. Rerum blanditiis perferendis totam, ea at omnis vel numquam exercitationem aut, natus minima, porro
+            labore.
+         </q-card-section>
+
+         <q-card-actions align="right">
+            <q-btn flat label="취소" color="secondary" v-close-popup />
+            <q-btn flat label="확인" color="secondary" v-close-popup />
+         </q-card-actions>
+      </q-card>
+   </q-dialog>
 </template>
 
 <script setup lang="ts">
 import {ref} from "vue"
 
+const selected = ref([])
+const getSelectedString = () => {
+   return selected.value.length === 0
+      ? ""
+      : `${selected.value.length} record${selected.value.length > 1 ? "s" : ""} selected of ${rows.length}`
+}
+
 const filter = ref("")
 
 const columns = [
    {
-      name: "number",
+      name: "num",
+      required: true,
       label: "번호",
-      field: "number",
-      align: "center",
+      field: "num",
+      sortable: true,
+      align: "left",
    },
-   {
-      name: "name",
-      label: "회원명",
-      field: "name",
-      align: "center",
-   },
-   {
-      name: "id",
-      label: "아이디",
-      field: "id",
-      align: "center",
-   },
-   {
-      name: "date",
-      label: "가입일",
-      field: "date",
-      align: "center",
-   },
-   {
-      name: "button",
-      label: "",
-      field: "button",
-      align: "center",
-   },
+   {name: "name", label: "이름", field: "name", align: "center"},
+   {name: "id", label: "아디이", field: "id", align: "center"},
+   {name: "dateCreate", label: "가입일", field: "dateCreate", align: "center"},
+   {name: "action", label: "", field: "action", align: "center"},
 ]
 
 const rows = [
    {
-      number: "1",
+      num: 1,
+      title: "상태관리란 무엇일까?",
       name: "홍길동",
       id: "test01",
-      date: "2022-09-23",
-      button: "비밀번호 변경",
+      dateCreate: "2022-09-23",
+      action: "비밀번호 변경",
    },
    {
-      number: "2",
-      name: "홍길동",
+      num: 2,
+      title: "상태관리란 무엇일까?",
+      name: "조혁래",
       id: "test01",
-      date: "2022-09-23",
-      button: "비밀번호 변경",
-   },
-   {
-      number: "3",
-      name: "홍길동",
-      id: "test01",
-      date: "2022-09-23",
-      button: "비밀번호 변경",
-   },
-   {
-      number: "3",
-      name: "홍길동",
-      id: "test01",
-      date: "2022-09-23",
-      button: "비밀번호 변경",
-   },
-   {
-      number: "3",
-      name: "홍길동",
-      id: "test01",
-      date: "2022-09-23",
-      button: "비밀번호 변경",
-   },
-   {
-      number: "3",
-      name: "홍길동",
-      id: "test01",
-      date: "2022-09-23",
-      button: "비밀번호 변경",
-   },
-   {
-      number: "3",
-      name: "홍길동",
-      id: "test01",
-      date: "2022-09-23",
-      button: "비밀번호 변경",
-   },
-   {
-      number: "3",
-      name: "홍길동",
-      id: "test01",
-      date: "2022-09-23",
-      button: "비밀번호 변경",
-   },
-   {
-      number: "3",
-      name: "홍길동",
-      id: "test01",
-      date: "2022-09-23",
-      button: "비밀번호 변경",
-   },
-   {
-      number: "3",
-      name: "홍길동",
-      id: "test01",
-      date: "2022-09-23",
-      button: "비밀번호 변경",
-   },
-   {
-      number: "3",
-      name: "홍길동",
-      id: "test01",
-      date: "2022-09-23",
-      button: "비밀번호 변경",
-   },
-   {
-      number: "3",
-      name: "홍길동",
-      id: "test01",
-      date: "2022-09-23",
-      button: "비밀번호 변경",
-   },
-   {
-      number: "3",
-      name: "홍길동",
-      id: "test01",
-      date: "2022-09-23",
-      button: "비밀번호 변경",
+      dateCreate: "2022-09-23",
+      action: "비밀번호 변경",
    },
 ]
+
+const modalDetailVal = ref(false)
+
+const openDetail = (val) => {
+   console.log(val)
+   modalDetailVal.value = true
+}
 </script>
 
 <style lang="scss" scoped>
