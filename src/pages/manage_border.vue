@@ -42,10 +42,12 @@
          </q-card-actions>
       </q-card>
    </q-dialog>
+   {{ message }}
 </template>
 
 <script setup lang="ts">
 import {ref} from "vue"
+import {fetchMessage} from "@/services/fetchers.js"
 
 const selected = ref([])
 const getSelectedString = () => {
@@ -96,6 +98,17 @@ const openDetail = (val) => {
    console.log(val)
    modalDetailVal.value = true
 }
+
+const message = ref("")
+
+const fetchData = async () => {
+   try {
+      message.value = await fetchMessage()
+   } catch (e) {
+      message.value = "server error"
+   }
+}
+fetchData()
 </script>
 
 <style lang="scss" scoped>
