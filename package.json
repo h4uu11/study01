@@ -21,7 +21,7 @@
   "devDependencies": {
     "@quasar/vite-plugin": "^1.2.3",
     "@rushstack/eslint-patch": "^1.1.4",
-    "@types/node": "^16.11.56",
+    "@types/node": "^18.11.9",
     "@vitejs/plugin-vue": "^3.0.3",
     "@vue/eslint-config-prettier": "^7.0.0",
     "@vue/eslint-config-typescript": "^11.0.0",

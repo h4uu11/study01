@@ -47,7 +47,7 @@
 
 <script setup lang="ts">
 import {ref} from "vue"
-import {fetchMessage} from "@/services/fetchers.js"
+import {fetchMessage, fetchMessageAxios} from "@/services/fetchers.js"
 
 const selected = ref([])
 const getSelectedString = () => {
@@ -103,7 +103,7 @@ const message = ref("")
 
 const fetchData = async () => {
    try {
-      message.value = await fetchMessage()
+      message.value = await fetchMessageAxios()
    } catch (e) {
       message.value = "server error"
    }
