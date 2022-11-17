@@ -10,13 +10,22 @@ import router from "./router"
 
 import "./assets/main.scss"
 
-const app = createApp(App)
+const main = async () => {
+   // Start mock server
+   if (import.meta.env.DEV || import.meta.env.VITE_IS_VERCEL) {
+      const {worker} = await import("./mocks/index")
+      worker.start()
+   }
 
-app.use(Quasar, {
-   plugins: {},
-})
+   const app = createApp(App)
 
-app.use(createPinia())
-app.use(router)
+   app.use(Quasar, {
+      plugins: {},
+   })
 
-app.mount("#app")
+   app.use(router)
+
+   app.mount("#app")
+}
+
+main()

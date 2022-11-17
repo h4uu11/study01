@@ -1,11 +1,11 @@
 import {rest} from "msw"
 
-export default [
-   rest.get("/message", (req, res, ctx) => {
-      // /message로 get 요청이 오면
+export const handlers = [
+   rest.get("/massege", (req, res, ctx) => {
       return res(
+         ctx.status(200),
          ctx.json({
-            message: "it works!", // 응답할 메시지를 it works로 정의
+            status: "ok",
          }),
       )
    }),
