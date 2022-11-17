@@ -4,15 +4,15 @@
    </div>
 </template>
 
-<script>
+<script lang="ts">
 const columns = [
    {
       name: "name",
       required: true,
       label: "Dessert (100g serving)",
       align: "left",
-      field: (row) => row.name,
-      format: (val) => `${val}`,
+      field: (row: {name: any}) => row.name,
+      format: (val: any) => `${val}`,
       sortable: true,
    },
    {name: "calories", align: "center", label: "Calories", field: "calories", sortable: true},
@@ -25,9 +25,15 @@ const columns = [
       label: "Calcium (%)",
       field: "calcium",
       sortable: true,
-      sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
+      sort: (a: string, b: string) => parseInt(a, 10) - parseInt(b, 10),
    },
-   {name: "iron", label: "Iron (%)", field: "iron", sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10)},
+   {
+      name: "iron",
+      label: "Iron (%)",
+      field: "iron",
+      sortable: true,
+      sort: (a: string, b: string) => parseInt(a, 10) - parseInt(b, 10),
+   },
 ]
 
 const rows = [

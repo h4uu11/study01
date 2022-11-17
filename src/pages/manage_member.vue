@@ -93,7 +93,7 @@ const rows = [
 
 const modalDetailVal = ref(false)
 
-const openDetail = (val) => {
+const openDetail = (val: any) => {
    console.log(val)
    modalDetailVal.value = true
 }

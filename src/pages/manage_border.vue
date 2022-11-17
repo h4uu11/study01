@@ -42,14 +42,14 @@
          </q-card-actions>
       </q-card>
    </q-dialog>
-   {{ message }}
 </template>
 
 <script setup lang="ts">
 import {ref} from "vue"
-import {fetchMessage, fetchMessageAxios} from "@/services/fetchers.js"
+import {boardList, boardDtl} from "@/services/fetchers.js"
 
 const selected = ref([])
+
 const getSelectedString = () => {
    return selected.value.length === 0
       ? ""
@@ -94,21 +94,13 @@ const rows = [
 
 const modalDetailVal = ref(false)
 
-const openDetail = (val) => {
+const openDetail = (val: any) => {
    console.log(val)
    modalDetailVal.value = true
 }
 
-const message = ref("")
-
-const fetchData = async () => {
-   try {
-      message.value = await fetchMessageAxios()
-   } catch (e) {
-      message.value = "server error"
-   }
-}
-fetchData()
+boardList()
+boardDtl()
 </script>
 
 <style lang="scss" scoped>
