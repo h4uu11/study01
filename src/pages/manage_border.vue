@@ -2,7 +2,7 @@
    <div class="table">
       <q-table
          title="Treats"
-         :rows="rows"
+         :rows="boardList.data"
          :columns="columns"
          row-key="num"
          :filter="filter"
@@ -42,34 +42,36 @@
          </q-card-actions>
       </q-card>
    </q-dialog>
+   {{ boardList.data }}
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue"
-import {boardList, boardDtl} from "@/services/fetchers.js"
+import {reactive, ref} from "vue"
+import {getBrd, getBrdDtl} from "@/services/fetchers.js"
 
 const selected = ref([])
 
+const boardList = reactive({data: undefined})
 const getSelectedString = () => {
    return selected.value.length === 0
       ? ""
-      : `${selected.value.length} record${selected.value.length > 1 ? "s" : ""} selected of ${rows.length}`
+      : `${selected.value.length} record${selected.value.length > 1 ? "s" : ""} selected of ${boardList.data.length}`
 }
 
 const filter = ref("")
 
 const columns = [
    {
-      name: "title",
+      name: "제목",
       required: true,
       label: "제목",
       field: "title",
       sortable: true,
       align: "left",
    },
-   {name: "name", label: "이름", field: "name", align: "center"},
-   {name: "dateCreate", label: "등록일", field: "dateCreate", align: "center"},
-   {name: "dateEdit", label: "수정일", field: "dateEdit", align: "center"},
+   {name: "이름", label: "이름", field: "name", align: "center"},
+   {name: "등록일", label: "등록일", field: "dateCreate", align: "center"},
+   {name: "수정일", label: "수정일", field: "dateEdit", align: "center"},
    {name: "action", label: "", field: "action", align: "center"},
 ]
 
@@ -99,8 +101,12 @@ const openDetail = (val: any) => {
    modalDetailVal.value = true
 }
 
-boardList()
-boardDtl()
+const fetch = async () => {
+   boardList.data = await getBrd()
+}
+fetch()
+
+getBrdDtl()
 </script>
 
 <style lang="scss" scoped>

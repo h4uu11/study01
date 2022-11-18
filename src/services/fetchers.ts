@@ -1,11 +1,11 @@
 import axios from "axios"
 
-export const boardList = async () => {
-   const res = await axios.get("/boardList")
+export const getBrd = async () => {
+   const res = await axios.get("/getBrd")
    return res.data
 }
 
-export const boardDtl = async () => {
-   const res = await axios.get("/boardDtl")
+export const getBrdDtl = async () => {
+   const res = await axios.get("/getBrdDtl")
    return res.data
 }

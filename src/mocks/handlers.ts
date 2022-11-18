@@ -1,21 +1,21 @@
 import {rest} from "msw"
 
 const boardList = [
-   {No: 1, brdNm: "게시글1"},
-   {No: 2, brdNm: "게시글2"},
-   {No: 2, brdNm: "게시글3"},
+   {순서: 1, 제목: "상태관리란 무엇일까?", 작성자: "조혁래", 등록일: "2022.11.11", 수정일: "2022.11.11"},
+   {순서: 2, 제목: "상태관리란 무엇일까?", 작성자: "조혁래", 등록일: "2022.11.11", 수정일: "2022.11.11"},
+   {순서: 3, 제목: "상태관리란 무엇일까?", 작성자: "조혁래", 등록일: "2022.11.11", 수정일: "2022.11.11"},
 ]
 const boardDtl = [
-   {No: 1, brdNm: "게시글1", brdDesc: "내용입니다.", date: "2022.11.11"},
+   {No: 1, brdNm: "상태관리란 무엇일까?", brdDesc: "내용입니다.", date: "2022.11.11"},
    {No: 2, brdNm: "게시글1", brdDesc: "내용입니다.", date: "2022.11.11"},
    {No: 3, brdNm: "게시글1", brdDesc: "내용입니다.", date: "2022.11.11"},
 ]
 
 export const handlers = [
-   rest.get("/boardList", (req, res, ctx) => {
+   rest.get("/getBrd", (req, res, ctx) => {
       return res(ctx.status(200), ctx.json(boardList))
    }),
-   rest.get("/boardDtl", (req, res, ctx) => {
+   rest.get("/getBrdDtl", (req, res, ctx) => {
       return res(ctx.status(200), ctx.json(boardDtl))
    }),
 ]
