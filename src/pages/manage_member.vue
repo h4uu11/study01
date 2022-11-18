@@ -4,7 +4,7 @@
          title="Treats"
          :rows="userList.data"
          :columns="columns"
-         row-key="num"
+         row-key="번호"
          :filter="filter"
          :selected-rows-label="getSelectedString"
          selection="multiple"
