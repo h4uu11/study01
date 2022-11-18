@@ -2,7 +2,7 @@
    <div class="table">
       <q-table
          title="Treats"
-         :rows="rows"
+         :rows="userList.data"
          :columns="columns"
          row-key="num"
          :filter="filter"
@@ -20,21 +20,26 @@
          </template>
          <template v-slot:body-cell-action="props">
             <q-td :props="props">
-               <q-btn outline text-color="secondary" @click="openDetail(props.row.num)">{{ props.value }}</q-btn>
+               <q-btn outline text-color="secondary" @click="openDetail(props.row)">비밀번호 변경</q-btn>
             </q-td>
          </template>
       </q-table>
    </div>
-   <q-dialog v-model="modalDetailVal">
+   <q-dialog v-model="modalDetailVal" persistent>
       <q-card dark>
          <q-card-section>
             <div class="text-h6">비밀번호 변경</div>
          </q-card-section>
 
-         <q-card-section class="q-pt-none">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum repellendus sit voluptate voluptas eveniet
-            porro. Rerum blanditiis perferendis totam, ea at omnis vel numquam exercitationem aut, natus minima, porro
-            labore.
+         <q-card-section>
+            <q-input
+               type="password"
+               color="secondary"
+               dark
+               v-model="password"
+               autofocus
+               @keyup.enter="modalDetailVal = false"
+            />
          </q-card-section>
 
          <q-card-actions align="right">
@@ -46,57 +51,51 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue"
+import {ref, reactive} from "vue"
+import {getUser} from "@/services/fetchers.js"
+
+// 비밀번호 변경
+const password = ref("")
 
 const selected = ref([])
+
 const getSelectedString = () => {
    return selected.value.length === 0
       ? ""
-      : `${selected.value.length} record${selected.value.length > 1 ? "s" : ""} selected of ${rows.length}`
+      : `${selected.value.length} record${selected.value.length > 1 ? "s" : ""} selected of ${userList.data.length}`
 }
 
 const filter = ref("")
 
 const columns = [
    {
-      name: "num",
+      name: "번호",
       required: true,
       label: "번호",
-      field: "num",
+      field: "번호",
       sortable: true,
       align: "left",
    },
-   {name: "name", label: "이름", field: "name", align: "center"},
-   {name: "id", label: "아디이", field: "id", align: "center"},
-   {name: "dateCreate", label: "가입일", field: "dateCreate", align: "center"},
+   {name: "이름", label: "이름", field: "이름", align: "center"},
+   {name: "아이디", label: "아디이", field: "아이디", align: "center"},
+   {name: "가입일", label: "가입일", field: "가입일", align: "center"},
    {name: "action", label: "", field: "action", align: "center"},
-]
-
-const rows = [
-   {
-      num: 1,
-      title: "상태관리란 무엇일까?",
-      name: "홍길동",
-      id: "test01",
-      dateCreate: "2022-09-23",
-      action: "비밀번호 변경",
-   },
-   {
-      num: 2,
-      title: "상태관리란 무엇일까?",
-      name: "조혁래",
-      id: "test01",
-      dateCreate: "2022-09-23",
-      action: "비밀번호 변경",
-   },
 ]
 
 const modalDetailVal = ref(false)
 
+let modalDtl = reactive({data: undefined})
+
 const openDetail = (val: any) => {
-   console.log(val)
+   modalDtl.data = val
    modalDetailVal.value = true
 }
+
+const userList = reactive({data: undefined})
+const fetch = async () => {
+   userList.data = await getUser()
+}
+fetch()
 </script>
 
 <style lang="scss" scoped>

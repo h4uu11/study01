@@ -20,7 +20,7 @@
          </template>
          <template v-slot:body-cell-action="props">
             <q-td :props="props">
-               <q-btn outline text-color="secondary" @click="openDetail(props.row.num)">{{ props.value }}</q-btn>
+               <q-btn outline text-color="secondary" @click="openDetail(props.row)">상세보기</q-btn>
             </q-td>
          </template>
       </q-table>
@@ -28,30 +28,29 @@
    <q-dialog v-model="modalDetailVal">
       <q-card dark>
          <q-card-section>
-            <div class="text-h6">제목</div>
+            <div class="text-h6">
+               {{ modalDtl.data.제목 }}
+            </div>
          </q-card-section>
 
-         <q-card-section class="q-pt-none">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum repellendus sit voluptate voluptas eveniet
-            porro. Rerum blanditiis perferendis totam, ea at omnis vel numquam exercitationem aut, natus minima, porro
-            labore.
+         <q-card-section>
+            {{ modalDtl.data.내용 }}
          </q-card-section>
 
          <q-card-actions align="right">
+            <q-btn flat label="수정" color="secondary" v-close-popup />
             <q-btn flat label="확인" color="secondary" v-close-popup />
          </q-card-actions>
       </q-card>
    </q-dialog>
-   {{ boardList.data }}
 </template>
 
 <script setup lang="ts">
 import {reactive, ref} from "vue"
-import {getBrd, getBrdDtl} from "@/services/fetchers.js"
+import {getBrd} from "@/services/fetchers.js"
 
 const selected = ref([])
 
-const boardList = reactive({data: undefined})
 const getSelectedString = () => {
    return selected.value.length === 0
       ? ""
@@ -65,48 +64,30 @@ const columns = [
       name: "제목",
       required: true,
       label: "제목",
-      field: "title",
+      field: "제목",
       sortable: true,
       align: "left",
    },
-   {name: "이름", label: "이름", field: "name", align: "center"},
-   {name: "등록일", label: "등록일", field: "dateCreate", align: "center"},
-   {name: "수정일", label: "수정일", field: "dateEdit", align: "center"},
+   {name: "작성자", label: "작성자", field: "작성자", align: "center"},
+   {name: "등록일", label: "등록일", field: "등록일", align: "center"},
+   {name: "수정일", label: "수정일", field: "수정일", align: "center"},
    {name: "action", label: "", field: "action", align: "center"},
-]
-
-const rows = [
-   {
-      num: 1,
-      title: "상태관리란 무엇일까?",
-      name: "홍길동",
-      dateCreate: "2022-09-23",
-      dateEdit: "2022-09-23",
-      action: "상세보기",
-   },
-   {
-      num: 2,
-      title: "상태관리란 무엇일까?",
-      name: "조혁래",
-      dateCreate: "2022-09-23",
-      dateEdit: "2022-09-23",
-      action: "상세보기",
-   },
 ]
 
 const modalDetailVal = ref(false)
 
+let modalDtl = reactive({data: undefined})
+
 const openDetail = (val: any) => {
-   console.log(val)
+   modalDtl.data = val
    modalDetailVal.value = true
 }
 
+const boardList = reactive({data: undefined})
 const fetch = async () => {
    boardList.data = await getBrd()
 }
 fetch()
-
-getBrdDtl()
 </script>
 
 <style lang="scss" scoped>

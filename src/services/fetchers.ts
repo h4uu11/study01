@@ -5,7 +5,7 @@ export const getBrd = async () => {
    return res.data
 }
 
-export const getBrdDtl = async () => {
-   const res = await axios.get("/getBrdDtl")
+export const getUser = async () => {
+   const res = await axios.get("/getUser")
    return res.data
 }

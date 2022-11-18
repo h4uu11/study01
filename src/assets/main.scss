@@ -37,3 +37,8 @@ a {
       background-color: #222;
    }
 }
+
+.q-dialog__inner--minimized > div {
+   width: 100%;
+   border: 1px solid $secondary;
+}
