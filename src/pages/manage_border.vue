@@ -1,90 +1,146 @@
 <template>
-   <div class="table">
-      <q-table
-         title="Treats"
-         :rows="boardList.data"
-         :columns="columns"
-         row-key="번호"
-         :filter="filter"
-         :selected-rows-label="getSelectedString"
-         selection="multiple"
-         v-model:selected="selected"
-         dark
-      >
-         <template v-slot:top-right>
-            <q-input borderless dense debounce="300" v-model="filter" placeholder="Search" dark>
-               <template v-slot:append>
-                  <q-icon name="search" />
-               </template>
-            </q-input>
-         </template>
-         <template v-slot:body-cell-action="props">
-            <q-td :props="props">
-               <q-btn outline text-color="secondary" @click="openDetail(props.row)">상세보기</q-btn>
-            </q-td>
-         </template>
-      </q-table>
-      <div class="table-bottom__button">
-         <q-btn outline text-color="secondary" @click="openDetail()">작성하기</q-btn>
+   <div class="board">
+      <div class="today">
+         <div class="tx1" style="background-image: url('https://www.kakaocorp.com/page/calendar/dark/ico_date31.gif')">
+            오늘의 카카오
+         </div>
+         <div class="tx2">12월 23일 금요일 소식입니다.</div>
+      </div>
+      <div class="section-01">
+         <div class="con__big">
+            <div class="item__card">
+               <div class="item__text">
+                  <div class="item__title">카카오, ‘제10회 브런치북 출판 프로젝트’ 수상작 발표</div>
+               </div>
+               <div class="item__img">
+                  <img
+                     src="https://t1.kakaocdn.net/thumb/R1920x0.fwebp.q100/?fname=https%3A%2F%2Ft1.kakaocdn.net%2Fkakaocorp%2Fkakaocorp%2Fadmin%2Fnews%2F0de1e871018500001.png"
+                     alt=""
+                  />
+               </div>
+            </div>
+         </div>
+         <div class="con__samll">
+            <div class="item__card">
+               <div class="item__text">
+                  <div class="item__title">
+                     카카오, ‘제10회 브런치북 출10회 브런치북 출10회 브런치북 출10회 브런치북 출판 프로젝트’ 수상작 발표
+                  </div>
+               </div>
+               <div class="item__img">
+                  <img
+                     src="https://t1.kakaocdn.net/thumb/R1920x0.fwebp.q100/?fname=https%3A%2F%2Ft1.kakaocdn.net%2Fkakaocorp%2Fkakaocorp%2Fadmin%2Fnews%2F088937cb018500001.jpg"
+                     alt=""
+                  />
+               </div>
+            </div>
+            <div class="item__card">
+               <div class="item__text">
+                  <div class="item__title">카카오, ‘제10회 브런치북 출판 프로젝트’ 수상작 발표</div>
+               </div>
+               <div class="item__img">
+                  <img
+                     src="https://t1.kakaocdn.net/thumb/R1920x0.fwebp.q100/?fname=https%3A%2F%2Ft1.kakaocdn.net%2Fkakaocorp%2Fkakaocorp%2Fadmin%2Fnews%2F088937cb018500001.jpg"
+                     alt=""
+                  />
+               </div>
+            </div>
+            <div class="item__card">
+               <div class="item__text">
+                  <div class="item__title">카카오, ‘제10회 브런치북 출판 프로젝트’ 수상작 발표</div>
+               </div>
+               <div class="item__img">
+                  <img
+                     src="https://t1.kakaocdn.net/thumb/R1920x0.fwebp.q100/?fname=https%3A%2F%2Ft1.kakaocdn.net%2Fkakaocorp%2Fkakaocorp%2Fadmin%2Fnews%2F0e1f828c018500001.png"
+                     alt=""
+                  />
+               </div>
+            </div>
+            <div class="item__card">
+               <div class="item__text">
+                  <div class="item__title">카카오, ‘제10회 브런치북 출판 프로젝트’ 수상작 발표</div>
+               </div>
+               <div class="item__img">
+                  <img
+                     src="https://t1.kakaocdn.net/thumb/R1920x0.fwebp.q100/?fname=https%3A%2F%2Ft1.kakaocdn.net%2Fkakaocorp%2Fkakaocorp%2Fadmin%2Fnews%2F142f4ae7018500001.jpeg"
+                     alt=""
+                  />
+               </div>
+            </div>
+            <div class="item__card">
+               <div class="item__text">
+                  <div class="item__title">카카오, ‘제10회 브런치북 출판 프로젝트’ 수상작 발표</div>
+               </div>
+               <div class="item__img">
+                  <img
+                     src="https://t1.kakaocdn.net/thumb/R1920x0.fwebp.q100/?fname=https%3A%2F%2Ft1.kakaocdn.net%2Fkakaocorp%2Fkakaocorp%2Fadmin%2Fnews%2F0e1f828c018500001.png"
+                     alt=""
+                  />
+               </div>
+            </div>
+            <div class="item__card">
+               <div class="item__text">
+                  <div class="item__title">카카오, ‘제10회 브런치북 출판 프로젝트’ 수상작 발표</div>
+               </div>
+               <div class="item__img">
+                  <img
+                     src="https://t1.kakaocdn.net/thumb/R1920x0.fwebp.q100/?fname=https%3A%2F%2Ft1.kakaocdn.net%2Fkakaocorp%2Fkakaocorp%2Fadmin%2Fnews%2F0e1f828c018500001.png"
+                     alt=""
+                  />
+               </div>
+            </div>
+            <div class="item__card">
+               <div class="item__text">
+                  <div class="item__title">카카오, ‘제10회 브런치북 출판 프로젝트’ 수상작 발표</div>
+               </div>
+               <div class="item__img">
+                  <img
+                     src="https://t1.kakaocdn.net/thumb/R1920x0.fwebp.q100/?fname=https%3A%2F%2Ft1.kakaocdn.net%2Fkakaocorp%2Fkakaocorp%2Fadmin%2Fnews%2F0e1f828c018500001.png"
+                     alt=""
+                  />
+               </div>
+            </div>
+            <div class="item__card">
+               <div class="item__text">
+                  <div class="item__title">카카오, ‘제10회 브런치북 출판 프로젝트’ 수상작 발표</div>
+               </div>
+               <div class="item__img">
+                  <img
+                     src="https://t1.kakaocdn.net/thumb/R1920x0.fwebp.q100/?fname=https%3A%2F%2Ft1.kakaocdn.net%2Fkakaocorp%2Fkakaocorp%2Fadmin%2Fnews%2F088937cb018500001.jpg"
+                     alt=""
+                  />
+               </div>
+            </div>
+            <div class="item__card">
+               <div class="item__text">
+                  <div class="item__title">카카오, ‘제10회 브런치북 출판 프로젝트’ 수상작 발표</div>
+               </div>
+               <div class="item__img">
+                  <img
+                     src="https://t1.kakaocdn.net/thumb/R1920x0.fwebp.q100/?fname=https%3A%2F%2Ft1.kakaocdn.net%2Fkakaocorp%2Fkakaocorp%2Fadmin%2Fnews%2F13109877018500001.jpg"
+                     alt=""
+                  />
+               </div>
+            </div>
+            <div class="item__card">
+               <div class="item__text">
+                  <div class="item__title">카카오, ‘제10회 브런치북 출판 프로젝트’ 수상작 발표</div>
+               </div>
+               <div class="item__img">
+                  <img
+                     src="https://t1.kakaocdn.net/thumb/R1920x0.fwebp.q100/?fname=https%3A%2F%2Ft1.kakaocdn.net%2Fkakaocorp%2Fkakaocorp%2Fadmin%2Fnews%2F0e1f828c018500001.png"
+                     alt=""
+                  />
+               </div>
+            </div>
+         </div>
       </div>
    </div>
-   <q-dialog v-model="modalDetailVal">
-      <q-card dark>
-         <q-card-section>
-            <div class="text-h6">
-               <q-input outlined dark v-model="modalDtl.data.제목" label="제목" />
-            </div>
-         </q-card-section>
-
-         <q-card-section>
-            <input type="text" :value="modalDtl.data ? modalDtl.data.내용 : ''" />
-         </q-card-section>
-
-         <q-card-actions align="right">
-            <q-btn flat label="수정" color="secondary" v-close-popup />
-            <q-btn flat label="확인" color="secondary" v-close-popup />
-         </q-card-actions>
-      </q-card>
-   </q-dialog>
 </template>
 
 <script setup lang="ts">
-import {reactive, ref} from "vue"
+import {reactive} from "vue"
 import {getBrd} from "@/services/fetchers.js"
-
-const selected = ref([])
-
-const getSelectedString = () => {
-   return selected.value.length === 0
-      ? ""
-      : `${selected.value.length} record${selected.value.length > 1 ? "s" : ""} selected of ${boardList.data.length}`
-}
-
-const filter = ref("")
-
-const columns = [
-   {
-      name: "제목",
-      required: true,
-      label: "제목",
-      field: "제목",
-      sortable: true,
-      align: "left",
-   },
-   {name: "작성자", label: "작성자", field: "작성자", align: "center"},
-   {name: "등록일", label: "등록일", field: "등록일", align: "center"},
-   {name: "수정일", label: "수정일", field: "수정일", align: "center"},
-   {name: "action", label: "", field: "action", align: "center"},
-]
-
-const modalDetailVal = ref(false)
-
-let modalDtl = reactive({data: undefined})
-
-const openDetail = (val: any) => {
-   modalDtl.data = val
-   modalDetailVal.value = true
-}
 
 const boardList = reactive({data: undefined})
 const fetch = async () => {
@@ -93,4 +149,72 @@ const fetch = async () => {
 fetch()
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.board {
+   .today {
+      font-weight: 700;
+      font-size: 40px;
+      color: #fff;
+      .tx1 {
+         padding-left: 85px;
+         background-position: 0 center;
+         background-repeat: no-repeat;
+         background-size: 70px;
+         font-weight: inherit;
+      }
+      .tx2 {
+         font-weight: inherit;
+      }
+   }
+}
+.section-01 {
+   display: flex;
+   gap: 30px;
+   .item {
+      &__card {
+         border-radius: 15px;
+         overflow: hidden;
+      }
+      &__text {
+         padding: 20px;
+         background-color: #222;
+      }
+      &__title {
+         display: -webkit-box;
+         color: #fff;
+         font-size: 22px;
+         font-weight: 500;
+         overflow: hidden;
+         -webkit-box-orient: vertical;
+         -webkit-line-clamp: 2;
+      }
+      &__img {
+         position: relative;
+         padding-top: 70%;
+         img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+         }
+      }
+   }
+   .con {
+      &__big {
+         flex: 1;
+         .item__card {
+            position: sticky;
+            top: 30px;
+            transition: top 0.2s ease-in-out;
+         }
+      }
+      &__samll {
+         display: grid;
+         gap: 30px;
+         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+         flex: 1;
+      }
+   }
+}
+</style>
