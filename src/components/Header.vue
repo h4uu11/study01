@@ -16,10 +16,11 @@
 
 <style scoped lang="scss">
 .header {
+   padding-top: 20px;
    .top {
       display: flex;
       justify-content: space-between;
-      margin: 20px 0;
+      margin-bottom: 20px;
       .logo {
          font-size: 30px;
       }

@@ -1,6 +1,22 @@
 @import "./base.css";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap");
 
+/* 길이 변경 */
+::-webkit-scrollbar {
+   width: 10px;
+}
+
+/* 트랙 (Track) */
+::-webkit-scrollbar-track {
+   background: #333;
+}
+
+/* 핸들 (Handle) */
+::-webkit-scrollbar-thumb {
+   background: #666;
+   border-radius: 10px;
+}
+
 body {
    padding: 0 20px;
    font-family: "Noto Sans KR", sans-serif;
@@ -41,4 +57,13 @@ a {
 .q-dialog__inner--minimized > div {
    width: 100%;
    border: 1px solid $secondary;
+}
+
+.table {
+   margin-top: 40px;
+   &-bottom__button {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 30px;
+   }
 }

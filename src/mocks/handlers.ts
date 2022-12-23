@@ -58,7 +58,13 @@ export const handlers = [
    rest.get("/getBrd", (req, res, ctx) => {
       return res(ctx.status(200), ctx.json(boardList))
    }),
+
    rest.get("/getUser", (req, res, ctx) => {
       return res(ctx.status(200), ctx.json(userList))
+   }),
+
+   rest.post("/createBrd", (req, res, ctx) => {
+      boardList.push(req.body)
+      return res(ctx.status(201))
    }),
 ]

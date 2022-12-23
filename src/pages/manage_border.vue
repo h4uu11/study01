@@ -24,17 +24,20 @@
             </q-td>
          </template>
       </q-table>
+      <div class="table-bottom__button">
+         <q-btn outline text-color="secondary" @click="openDetail()">작성하기</q-btn>
+      </div>
    </div>
    <q-dialog v-model="modalDetailVal">
       <q-card dark>
          <q-card-section>
             <div class="text-h6">
-               {{ modalDtl.data.제목 }}
+               <q-input outlined dark v-model="modalDtl.data.제목" label="제목" />
             </div>
          </q-card-section>
 
          <q-card-section>
-            {{ modalDtl.data.내용 }}
+            <input type="text" :value="modalDtl.data ? modalDtl.data.내용 : ''" />
          </q-card-section>
 
          <q-card-actions align="right">
@@ -90,8 +93,4 @@ const fetch = async () => {
 fetch()
 </script>
 
-<style lang="scss" scoped>
-.table {
-   margin-top: 40px;
-}
-</style>
+<style lang="scss" scoped></style>

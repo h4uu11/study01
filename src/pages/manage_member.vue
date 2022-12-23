@@ -98,8 +98,4 @@ const fetch = async () => {
 fetch()
 </script>
 
-<style lang="scss" scoped>
-.table {
-   margin-top: 40px;
-}
-</style>
+<style lang="scss" scoped></style>
