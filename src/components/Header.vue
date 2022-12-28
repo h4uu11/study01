@@ -7,7 +7,7 @@
          <RouterLink to="/manage_folder">폴더 구조 관리</RouterLink>
       </div>
       <div class="util">
-         <RouterLink to="/login">로그인</RouterLink>
+         <RouterLink to="/login"> 로그인 </RouterLink>
       </div>
    </div>
 </template>
@@ -26,6 +26,10 @@
    }
    .util {
       display: flex;
+      gap: 20px;
+      svg {
+         fill: #fff;
+      }
    }
    .nav {
       display: flex;

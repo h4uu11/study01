@@ -62,7 +62,6 @@ const onSubmit = () => {
 
 <style lang="scss" scoped>
 .login {
-   height: 100vh;
    display: flex;
    align-items: center;
    .content {

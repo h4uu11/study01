@@ -1,12 +1,15 @@
 <template>
    <div class="board">
       <div class="today">
-         <div class="tx1" style="background-image: url('https://www.kakaocorp.com/page/calendar/dark/ico_date31.gif')">
-            오늘의 카카오
+         <div
+            class="tx1"
+            :style="{backgroundImage: `url(https://www.kakaocorp.com/page/calendar/dark/ico_date${day}.gif)`}"
+         >
+            오늘의 디플루이드
          </div>
-         <div class="tx2">12월 23일 금요일 소식입니다.</div>
+         <div class="tx2">{{ dateFormat }} 소식입니다.</div>
       </div>
-      <div class="section-01">
+      <div class="section section-01">
          <div class="con__big">
             <RouterLink to="/manage_border_detail">
                <div class="item__card">
@@ -190,6 +193,15 @@ const msnry = () => {
 onMounted(() => {
    msnry()
 })
+
+const date = new Date()
+
+const day = date.getDate()
+const dateFormat = date.toLocaleDateString("ko", {
+   month: "short",
+   day: "numeric",
+   weekday: "long",
+})
 </script>
 
 <style lang="scss" scoped>
@@ -210,92 +222,105 @@ onMounted(() => {
          font-weight: inherit;
       }
    }
-}
-.section-01 {
-   display: flex;
-   gap: 40px;
-   .item {
-      &__card {
-         border-radius: 15px;
-         overflow: hidden;
-         transition: all 0.2s ease-in-out 0s;
-         &:hover {
-            transform: translateY(-5px);
-         }
-      }
-      &__text {
-         padding: 20px;
-         background-color: #222;
-      }
-      &__header {
-         display: flex;
-         align-items: center;
-         margin-bottom: 10px;
-      }
-      &__date {
-         color: #999;
-         font-size: 12px;
-      }
-      &__category {
-         margin-right: 10px;
-         padding: 5px 10px;
-         background-color: #444;
-         color: #fff;
-         font-size: 13px;
-         border-radius: 15px;
-      }
-      &__tags {
-         margin-top: 20px;
-         color: #777;
-      }
-      &__title {
-         display: -webkit-box;
-         color: #fff;
-         font-size: 22px;
-         font-weight: 700;
-         overflow: hidden;
-         -webkit-box-orient: vertical;
-         -webkit-line-clamp: 2;
-      }
-      &__img {
-         position: relative;
-         padding-top: 70%;
-         img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-         }
-      }
-   }
-   .con {
-      &__big {
-         width: 50%;
-         .item {
-            &__card {
-               position: sticky;
-               top: 40px;
+   .section {
+      display: flex;
+      gap: 40px;
+      .item {
+         &__card {
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.2s ease-in-out 0s;
+            &:hover {
+               transform: translateY(-5px);
             }
-            &__title {
-               font-size: 30px;
+         }
+         &__text {
+            padding: 20px;
+            background-color: #222;
+         }
+         &__header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+         }
+         &__date {
+            color: #999;
+            font-size: 12px;
+         }
+         &__category {
+            margin-right: 10px;
+            padding: 5px 10px;
+            background-color: #444;
+            color: #fff;
+            font-size: 13px;
+            border-radius: 15px;
+         }
+         &__tags {
+            margin-top: 20px;
+            color: #777;
+         }
+         &__title {
+            display: -webkit-box;
+            color: #fff;
+            font-size: 22px;
+            font-weight: 700;
+            overflow: hidden;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+         }
+         &__img {
+            position: relative;
+            padding-top: 70%;
+            img {
+               position: absolute;
+               inset: 0;
+               width: 100%;
+               height: 100%;
+               object-fit: cover;
             }
          }
       }
-      &__samll {
-         width: 50%;
-         .grid {
-            &__sizer,
-            &__item {
-               width: calc(50% - 20px);
-            }
-            &__item {
-               margin-bottom: 40px;
+      .con {
+         &__big {
+            width: 50%;
+            .item {
+               &__card {
+                  position: sticky;
+                  top: 40px;
+               }
+               &__title {
+                  font-size: 30px;
+               }
+               &__tags {
+                  font-size: 16px;
+               }
+               &__date {
+                  font-size: 14px;
+               }
+               &__category {
+                  font-size: 16px;
+               }
             }
          }
-         .gutter__sizer {
-            width: 40px;
+         &__samll {
+            width: 50%;
+            .grid {
+               &__sizer,
+               &__item {
+                  width: calc(50% - 20px);
+               }
+               &__item {
+                  margin-bottom: 40px;
+               }
+            }
+            .gutter__sizer {
+               width: 40px;
+            }
          }
+      }
+      &-01 {
+      }
+      &-02 {
       }
    }
 }
